@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lofi Time</title>
+    <style>
+      body {
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-image: url("./assets/upklyak-freepik-lofi.jpg");
+        background-size: cover;
+        width: 100%;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #time {
+        color: #ffffff;
+        font-family: Helvetica, Arial,  sans-serif;
+        font-size: 45vh;
+        text-shadow: #000 0px 0px 20px;
+      }
+    </style>
+</head>
+<body>
+  <h1 id="time"></h1>
+  <script>
+    const time = document.getElementById('time');
+    const timezone = new URLSearchParams(window.location.search).get('timezone') ?? 'Australia/Brisbane';
+    let options = {
+        timeZone: timezone,
+        hour: '2-digit',
+        minute: '2-digit',
+        hourCycle: 'h12'
+      };
+    const formatter = new Intl.DateTimeFormat([], options);
+    const renderTime = () => {
+      new Date();
+      time.innerText = formatter.format(new Date()).split(' ')[0];
+    };
+    renderTime();
+    setInterval(renderTime, 1000);
+  </script>
+</body>
+</html>
